@@ -25,17 +25,16 @@ Teardown(ctx =>
 // TASKS
 ///////////////////////////////////////////////////////////////////////////////
 
-T
 
-Task("Default")
-.Does(() => {
-   Information("Hello Cake!");
-});
+// Task("Default")
+// .Does(() => {
+//    Information("Hello Cake!");
+// });
 
-Task("Unit-Test")
-.Does(()=>{
-   Information("Executing UnitTest");
-   XUnit2("*Tests");
-});
+// Task("Unit-Test")
+// .Does(()=>{
+//    Information("Executing UnitTest");
+//    XUnit2("*Tests");
+// });
 
-RunTarget(target);
+// RunTarget(target);
