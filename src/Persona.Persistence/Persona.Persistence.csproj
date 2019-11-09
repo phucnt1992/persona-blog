@@ -8,4 +8,9 @@
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.0.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Persona.Domain\Persona.Domain.csproj" />
+  </ItemGroup>
+
+
 </Project>
