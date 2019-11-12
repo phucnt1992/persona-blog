@@ -10,6 +10,5 @@ namespace Persona.Domain.Entities
         public virtual User Commenter { get; set; }
         public virtual Article Article { get; set; }
         public virtual Comment ReplyTo { get; set; }
-
     }
 }
