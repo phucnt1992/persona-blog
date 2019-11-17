@@ -1,4 +1,4 @@
-namespace Persona.Domain.Entities
+znamespace Persona.Domain.Entities
 {
     using System;
     using System.Collections.Generic;
