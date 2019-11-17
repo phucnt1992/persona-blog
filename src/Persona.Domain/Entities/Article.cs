@@ -1,10 +1,10 @@
 namespace Persona.Domain.Entities
 {
-    using System;
     using System.Collections.Generic;
 
-    public class Article : BaseEntity<long>
+    public class Article : BaseEntity
     {
+        public long Id { get; set; }
         public string Title { get; set; }
         public string Content { get; set; }
         public string Slug { get; set; }
