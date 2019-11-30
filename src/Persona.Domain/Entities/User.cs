@@ -1,10 +1,11 @@
-znamespace Persona.Domain.Entities
+namespace Persona.Domain.Entities
 {
     using System;
     using System.Collections.Generic;
 
-    public class User : BaseEntity<Guid>
+    public class User : BaseEntity
     {
+        public Guid Id { get; set; }
         public bool IsAdmin { get; set; }
         public bool IsStaff { get; set; }
         public DateTime LastLogined { get; set; }

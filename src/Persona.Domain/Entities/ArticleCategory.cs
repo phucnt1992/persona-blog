@@ -1,6 +1,6 @@
 namespace Persona.Domain.Entities
 {
-    public class ArticleCategory : BaseEntity<long>
+    public class ArticleCategory
     {
         public long ArticleId { get; set; }
         public virtual Article Article { get; set; }

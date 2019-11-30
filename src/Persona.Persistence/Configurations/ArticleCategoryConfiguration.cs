@@ -11,12 +11,12 @@ namespace Persona.Persistence.Configurations
             builder.HasKey(ac => new { ac.ArticleId, ac.CategoryId });
 
             builder
-            .HasOne(ac => ac.Article)
+            .HasOne<Article>(ac => ac.Article)
             .WithMany(a => a.ArticleCategories)
             .HasForeignKey(ac => ac.ArticleId);
 
             builder
-            .HasOne(ac => ac.Category)
+            .HasOne<Category>(ac => ac.Category)
             .WithMany(c => c.ArticleCategories)
             .HasForeignKey(ac => ac.CategoryId);
         }

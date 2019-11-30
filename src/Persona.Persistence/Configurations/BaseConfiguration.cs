@@ -3,11 +3,12 @@ namespace Persona.Persistence.Configurations
     using System;
     using Microsoft.EntityFrameworkCore;
     using Microsoft.EntityFrameworkCore.Metadata.Builders;
-    using Persona.Domain.Entities.Base;
+    using Persona.Domain.Entities;
 
-    public abstract class BaseCategoryConfiguration : IEntityTypeConfiguration<IEntity>
+    public abstract class BaseConfiguration<TBaseEntity> : IEntityTypeConfiguration<TBaseEntity>
+    where TBaseEntity : BaseEntity
     {
-        public void Configure(EntityTypeBuilder<IEntity> builder)
+        public void Configure(EntityTypeBuilder<TBaseEntity> builder)
         {
             builder.Property(r => r.Created)
                 .IsRequired();

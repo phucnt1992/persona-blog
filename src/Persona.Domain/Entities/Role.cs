@@ -1,7 +1,9 @@
 namespace Persona.Domain.Entities
 {
-    public class Role : BaseEntity<long>
+    public class Role : BaseEntity
     {
-        public int MyProperty { get; set; }
+        public long Id { get; set; }
+        public string Name { get; set; }
+        public bool IsActivate { get; set; }
     }
 }
