@@ -1,14 +1,15 @@
 version: "3.7"
 services:
   sql-server:
-    image: mcr.microsoft.com/mssql/server:2019-latest
+    build: ./db
     ports:
       - 1433:1433
     volumes:
-      - ./volumes/sqlserver:/var/opt/mssql
+      - ./volumes/sql-server:/var/opt/mssql/data
     environment:
       - ACCEPT_EULA=y
       - SA_PASSWORD=p@ssw0rd
+
   redis:
     image: redis:5-alpine
     ports:
