@@ -1,0 +1,18 @@
+version: "3.7"
+services:
+  sql-server:
+    image: mcr.microsoft.com/mssql/server:2019-latest
+    ports:
+      - 1433:1433
+    volumes:
+      - ./volumes/sqlserver:/var/opt/mssql
+    environment:
+      - ACCEPT_EULA=y
+      - SA_PASSWORD=p@ssw0rd
+  redis:
+    image: redis:5-alpine
+    ports:
+      - 6379:6379
+    volumes:
+      - ./volumes/redis:/data
+    command: redis-server --appendonly yes
