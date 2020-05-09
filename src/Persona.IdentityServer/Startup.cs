@@ -14,6 +14,9 @@ using Persona.IdentityServer.Persistence;
 using Persona.IdentityServer.Configurations;
 using System.Collections.Generic;
 using IdentityServer4.Test;
+using Microsoft.OpenApi.Models;
+using Persona.IdentityServer.Services;
+using Persona.IdentityServer.Extensions;
 
 namespace Persona.IdentityServer
 {
@@ -46,14 +49,7 @@ namespace Persona.IdentityServer
             {
                 opt.IssuerUri = Configuration["IdentityServer:IssuerUri"];
             })
-            .AddInMemoryClients(Config.Clients)
-            .AddInMemoryIdentityResources(Config.IdentityResources)
-            .AddInMemoryApiResources(Config.ApiResources)
             .AddDeveloperSigningCredential()
-            .AddTestUsers(new List<TestUser>
-            {
-                new TestUser{ Username="test", Password="password", IsActive= true, }
-            })
             .AddOperationalStore(opt =>
             {
                 opt.ConfigureDbContext = builder => builder.UseSqlServer(this.DefaultConnectionString, sql => sql.MigrationsAssembly(migrationsAssembly));
@@ -77,6 +73,15 @@ namespace Persona.IdentityServer
             services.AddControllers();
             services.AddControllersWithViews();
             services.AddRazorPages();
+
+            // Register the Swagger generator, defining 1 or more Swagger documents
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "Persona - Identity Server API", Version = "v1" });
+            });
+
+            // Service Injection
+            services.AddTransient<IAccountService<ApplicationUser>, LocalAccountService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -84,7 +89,13 @@ namespace Persona.IdentityServer
         {
             if (env.IsDevelopment())
             {
+                // Enable middleware to serve generated Swagger as a JSON endpoint.
+                app.UseSwagger();
                 app.UseDeveloperExceptionPage();
+                app.UseSwaggerUI(c =>
+                {
+                    c.SwaggerEndpoint("/swagger/v1/swagger.json", "Persona - Identity Server V1");
+                });
             }
             else
             {

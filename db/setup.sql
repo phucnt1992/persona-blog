@@ -1,3 +1,3 @@
-IF(db_id(N'IdentityDb') IS NULL)
-    CREATE DATABASE [IdentityDb];
+IF(db_id(N'IdentityServer') IS NULL)
+    CREATE DATABASE [IdentityServer];
 GO

@@ -2,7 +2,6 @@ using System;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using Persona.IdentityServer.Models;
-using Persona.IdentityServer.Persistence;
 
 namespace Persona.IdentityServer.Services
 {
@@ -13,14 +12,14 @@ namespace Persona.IdentityServer.Services
         private SignInManager<ApplicationUser> _signInManager;
 
         public LocalAccountService(
-             UserManager<ApplicationUser> userManager,
-             RoleManager<IdentityRole> roleManager,
-             SignInManager<ApplicationUser> signInManager
+            UserManager<ApplicationUser> userManager,
+            RoleManager<IdentityRole> roleManager,
+            SignInManager<ApplicationUser> signInManager
         )
         {
-            _userManager = userManager ?? throw new ArgumentNullException(nameof(userManager), $"{nameof(userManager)} cannot be null.");
-            _roleManager = roleManager ?? throw new ArgumentNullException(nameof(roleManager), $"{nameof(roleManager)} cannot be null.");
-            _signInManager = signInManager ?? throw new ArgumentNullException(nameof(signInManager), $"{nameof(signInManager)} cannot be null.");
+            _userManager = userManager ?? throw new ArgumentNullException(nameof(userManager));
+            _roleManager = roleManager ?? throw new ArgumentNullException(nameof(roleManager));
+            _signInManager = signInManager ?? throw new ArgumentNullException(nameof(signInManager));
         }
 
         public async Task<ApplicationUser> FindByUsernameAsync(string username)
@@ -37,6 +36,5 @@ namespace Persona.IdentityServer.Services
         {
             await _signInManager.SignInAsync(user, isPersistent);
         }
-
     }
 }

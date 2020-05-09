@@ -434,3 +434,6 @@ $RECYCLE.BIN/
 
 # Docker Volumes
 volumes
+
+# Client Libs
+lib

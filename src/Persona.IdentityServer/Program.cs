@@ -1,19 +1,25 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
+using Persona.IdentityServer.Extensions;
 
 namespace Persona.IdentityServer
 {
     public class Program
     {
-        public static void Main(string[] args)
+        public static async Task Main(string[] args)
         {
-            CreateHostBuilder(args).Build().Run();
+            var webHost = CreateHostBuilder(args).Build();
+
+            var env = webHost.Services.GetService<IWebHostEnvironment>();
+            if (env.IsDevelopment())
+            {
+                await webHost.SeedIdentityDatabaseAsync();
+                await webHost.SeedSuperAdminAccountAsync();
+            }
+
+            await webHost.RunAsync();
         }
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>

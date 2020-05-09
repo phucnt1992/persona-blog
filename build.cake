@@ -1,5 +1,5 @@
-#tool nuget:?package=Cake.DotNetCoreEf
-#addin nuget:?package=Cake.DotNetCoreEf
+#addin nuget:?package=Cake.DotNetCoreEf&version=0.10.0
+#tool "nuget:?package=xunit.runner.console"
 ///////////////////////////////////////////////////////////////////////////////
 // ARGUMENTS
 ///////////////////////////////////////////////////////////////////////////////
@@ -19,7 +19,13 @@ Teardown(ctx =>
    Information("Finished running tasks.");
 });
 
-Task("Run-EF-Core-Migration")
+Task("Run-EF-Core-Migration-Identity-Server")
 .Does(()=>{
-   DotNetCoreEfDatabaseUpdate("./src/Persona.IdentityServer");
-})
+   Information("Migrating IdentityServer DB...");
+   DotNetCoreEfDatabaseUpdate("./src/Persona.IdentityServer",  new DotNetCoreEfDatabaseUpdateSettings{ Context = "ConfigurationDbContext"});
+   DotNetCoreEfDatabaseUpdate("./src/Persona.IdentityServer",  new DotNetCoreEfDatabaseUpdateSettings{ Context = "PersistedGrantDbContext"});
+   DotNetCoreEfDatabaseUpdate("./src/Persona.IdentityServer", new DotNetCoreEfDatabaseUpdateSettings{ Context = "ApplicationDbContext"});
+   Information("Finish to migrate IdentityServer DB.");
+});
+
+RunTarget(target);

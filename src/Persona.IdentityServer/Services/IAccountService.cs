@@ -7,5 +7,7 @@ namespace Persona.IdentityServer.Services
         Task<bool> ValidateCredentialsAsync(T user, string password);
 
         Task<T> FindByUsernameAsync(string username);
+
+        Task SignInUserAsync(T user, bool isPersistent = true);
     }
 }
